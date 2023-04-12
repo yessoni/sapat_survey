@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- <link rel="stylesheet" type="text/css" href="//use.fontawesome.com/releases/v5.7.2/css/all.css"> -->
+    <style>
+        .multiselect {
+            display: flex;
+            flex-wrap: wrap;
+            align-content: center;
+        }
+
+        .multiselect label {
+            display: block;
+        }
+
+        .multiselect-on {
+            color: #ffffff;
+            background-color: #000099;
+        }
+
+        label {
+            margin: 6px;
+            border-radius: 5px;
+            border: 1px solid #f3f3f3;
+            padding: 8px;
+        }
+
+        .para {
+            margin: 1px 10px;
+            color: #000;
+            font-size: 20px;
+            font-weight: 700;
+        }
+
+        h2 {
+            margin: 10px 10px 0px 10px;
+            color: #ff6426;
+        }
+
+        .custom-checkbox input[type="checkbox"]:checked+.label-text:before {
+            content: "\f14a";
+            color: #2980b9;
+            animation: effect 250ms ease-in;
+        }
+
+        .custom-checkbox input[type="checkbox"]+.label-text:before {
+            content: "\f0c8";
+            font-family: "Font Awesome 5 Pro";
+            speak: none;
+            font-style: normal;
+            font-weight: normal;
+            font-variant: normal;
+            text-transform: none;
+            line-height: 1;
+            -webkit-font-smoothing: antialiased;
+            width: 1em;
+            display: inline-block;
+            margin-right: 5px;
+        }
+
+        section {
+            border: 1px solid #f3f3f3;
+            box-sizing: border-box;
+            border-radius: 10px;
+            box-shadow: 3px 1px 3px 1px #bdbdbd;
+            margin: 13px auto;
+            padding: 6px;
+        }
+
+        .count {
+            border: 1px solid #e4e4e4;
+            border-radius: 10px;
+            margin: 6px;
+            padding: 5px;
+        }
+
+        .title {
+            font-size: 18px;
+            margin: 4px !important;
+        }
+
+        .tbold {
+            font-weight: 700;
+            margin: 4px !important;
+        }
+    </style>
+</head>
+
+<body>
+    <h1 style="margin: 5px;">Dashboard</h1>
+    {% for d in cat %}
+    <section>
+        <h2>{{d.cat_name}}</h2>
+        {% for ch in channel %}
+        {% if ch.cat_id == d.id %}
+        {% if 'none' in ch.channel_name %}
+        {% else %}
+        <p class="para">{{ch.channel_name}}</p>
+        {% endif %}
+        <div class="multiselect custom-checkbox">
+            {% for data in shows %}
+            {% if data.channel_id == ch.id %}
+            <div class="count">
+                <p class="label-text tbold">{{data.show_name}}</p>
+                {% for key, values in data_dict.items %}
+                {% if key == data.id %}
+                {% for k1, v1 in values.items %}
+                {% for a in area %}
+                {% if a.id == k1 %}
+                <p class="label-text title">{{a}}: {{v1}} </p>
+                {% endif %}
+                {% endfor %}
+                {% endfor %}
+                {% endif %}
+                {% endfor %}
+                <p class="label-text tbold">Count: {{data.show_survey.count}}</p>
+            </div>
+            {% endif %}
+            {% endfor %}
+        </div>
+        {% endif %}
+        {% endfor %}
+    </section>
+    {% endfor %}
+</body>
+
+</html>
