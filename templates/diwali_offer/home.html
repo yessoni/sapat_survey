@@ -170,7 +170,8 @@
 <body>
   <form method="POST" onsubmit="return validateForm();">
     {% csrf_token %}
-    <h1 style="margin: 5px;">Survey Form</h1>
+    <!-- <h1 style="margin: 5px;">Survey Form</h1> -->
+    <h1 style="margin: 5px;"><img style="width:40px" src="{% static 'image/logo.png' %}"><span>&nbsp;&nbsp;&nbsp;</span> Survey Form</h1>
     <section>
       <h2>विभाग निवडा</h2>
       <div class="multiselect custom-checkbox select">
@@ -191,18 +192,18 @@
           required /><span class="label-text">स्त्री</span></label>
     </section>
     <section style="padding-bottom: 13px;">
-      <h2>Name</h2>
-      <label style="border: none; margin: 0;"><input type="text" value="" name="username" placeholder="Enter Your Name"
-          required /></label>
+      <h2>नाव</h2>
+      <input style="border: 1px solid #d7d4d4; width: 40px; border-radius: 6px; padding: 8px;margin: 0 6px;" type="text" placeholder="Name" id="name" name="Fullname">
     </section>
     {% for d in cat %}
     <section class="section_cat_{{ forloop.counter }} block_div">
-      <h2>{{d.cat_name}} <span style="font-size:14px !important;color: #a1a1a1;">(कोणतेही तीन निवडा)</span></h2>
+      <!-- <h2>{{d.cat_name}} <span style="font-size:14px !important;color: #a1a1a1;">(कोणतेही तीन निवडा)</span></h2> -->
       {% for ch in channel %}
       {% if ch.cat_id == d.id %}
       {% if 'none' in ch.channel_name %}
       {% else %}
-      <p class="channel_name {{ch.id}}">{{ch.channel_name}}</p>
+      <!-- <p class="channel_name {{ch.id}}">{{ch.channel_name}}</p> -->
+      <h2>{{ch.channel_name}} <span style="font-size:14px !important;color: #a1a1a1;">(कोणतेही तीन निवडा)</span></h2>
       {% endif %}
       <div class="multiselect custom-checkbox div_count">
         {% for data in shows %}
@@ -272,6 +273,7 @@
       })
     }
 
+// atleast one check
     // function validateForm(){
     //   var div_count = $('.div_count').length
     //   for (let i = 0; i < div_count; i++) {
@@ -299,42 +301,10 @@
     //   return false;
     // }
 
-    
-    function validateForm() {
-      var counter = 0
-      var old_div_count = 0
-      var a = document.getElementsByName('choices')
-      // alert(a.length)
-      var div_count = $('.block_div').length
-      // alert(div_count)
-      var total=$('input[name=choices]:checked').length;
-      // alert(total)
-      for (j=1; j<=div_count; j++) {
-        // alert(j)
-        if (j%2==0){
-          // alert(j)
-          continue;
-        }
-        else {
-          old_div_count+=1
-          if ($(".section_cat_"+j+" input[name='choices']:checked").length>0){
-            counter+=1;
-          }
-        }
-      }
-      
-      if (counter==old_div_count){
-            return true;
-          }
-          else{
-            alert("कृपया फॉर्ममधील सर्व तपशील भरा!")
-            return false;
-          }
-    }
-
-
+// even old
     // function validateForm() {
     //   var counter = 0
+    //   var old_div_count = 0
     //   var a = document.getElementsByName('choices')
     //   // alert(a.length)
     //   var div_count = $('.block_div').length
@@ -343,13 +313,19 @@
     //   // alert(total)
     //   for (j=1; j<=div_count; j++) {
     //     // alert(j)
-    //     if ($(".section_cat_"+j+" input[name='choices']:checked").length>0){
-    //       counter+=1;
-    //       // alert(counter)
-          
+    //     if (j%2==0){
+    //       // alert(j)
+    //       continue;
+    //     }
+    //     else {
+    //       old_div_count+=1
+    //       if ($(".section_cat_"+j+" input[name='choices']:checked").length>0){
+    //         counter+=1;
+    //       }
     //     }
     //   }
-    //   if (counter==div_count){
+      
+    //   if (counter==old_div_count){
     //         return true;
     //       }
     //       else{
@@ -357,6 +333,32 @@
     //         return false;
     //       }
     // }
+
+// check in each div
+    function validateForm() {
+      var counter = 0
+      var a = document.getElementsByName('choices')
+      // alert(a.length)
+      var div_count = $('.block_div').length
+      // alert(div_count)
+      var total=$('input[name=choices]:checked').length;
+      // alert(total)
+      for (j=1; j<=div_count; j++) {
+        // alert(j)
+        if ($(".section_cat_"+j+" input[name='choices']:checked").length>0){
+          counter+=1;
+          // alert(counter)
+          
+        }
+      }
+      if (counter==div_count){
+            return true;
+          }
+          else{
+            alert("कृपया फॉर्ममधील सर्व तपशील भरा!")
+            return false;
+          }
+    }
 
   </script>
 </body>

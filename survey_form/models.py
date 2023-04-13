@@ -26,6 +26,8 @@ class Shows(models.Model):
     cat = models.ForeignKey(Category, on_delete = models.CASCADE)
     channel = models.ForeignKey(Channel, on_delete = models.CASCADE)
     show_name = models.CharField(max_length=255)
+    # show_name_english = models.CharField(max_length=255)
+
 
     def __str__(self):
         return self.show_name # TODO
@@ -41,6 +43,7 @@ class ServayEntry(models.Model):
     area = models.ForeignKey(Area, on_delete = models.CASCADE)
     gender = models.CharField(max_length=1, choices=GENDER_CHOICES)
     name = models.CharField(max_length=50,null=True,blank=True)
+    created_at = models.DateTimeField(auto_now_add=True)
 
 
 

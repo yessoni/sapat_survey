@@ -7,3 +7,5 @@ admin.site.register(Channel)
 admin.site.register(Shows)
 admin.site.register(ServayEntry)
 admin.site.register(Area)
+
+admin.site.site_header = "Survey administration"
