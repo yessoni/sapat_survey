@@ -193,7 +193,7 @@
     </section>
     <section style="padding-bottom: 13px;">
       <h2>नाव</h2>
-      <input style="border: 1px solid #d7d4d4; width: 40px; border-radius: 6px; padding: 8px;margin: 0 6px;" type="text" placeholder="Name" id="name" name="Fullname">
+      <input style="border: 1px solid #d7d4d4; width: 250px; border-radius: 6px; padding: 8px;margin: 0 6px;" type="text" placeholder="Name" id="name" name="Fullname" required>
     </section>
     {% for d in cat %}
     <section class="section_cat_{{ forloop.counter }} block_div">
@@ -203,7 +203,7 @@
       {% if 'none' in ch.channel_name %}
       {% else %}
       <!-- <p class="channel_name {{ch.id}}">{{ch.channel_name}}</p> -->
-      <h2>{{ch.channel_name}} <span style="font-size:14px !important;color: #a1a1a1;">(कोणतेही तीन निवडा)</span></h2>
+      <h2>{{ch.channel_name}} <span style="font-size:14px !important;color: #a1a1a1;">(कोणतेही एक निवडा)</span></h2>
       {% endif %}
       <div class="multiselect custom-checkbox div_count">
         {% for data in shows %}

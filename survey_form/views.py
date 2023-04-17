@@ -1,25 +1,23 @@
 from multiprocessing import context
 from django.shortcuts import redirect, render
-
+from django.db.models import Count
 from survey_form.serializers import CategorySerializer
 from rest_framework import generics,viewsets
 from .models import *
 
 # Create your views here.
-from django.db.models import Count
-
 
 def home(request):
     if request.method == "POST":
         if request.POST.getlist("choices") and request.POST.get('area') and request.POST.get('check'):
             for data in request.POST.getlist("choices"):
-                if ServayEntry.objects.filter(show_id=int(data), sessionId=request.COOKIES['csrftoken'], area_id=int(request.POST.get('area')), gender=request.POST.get('check'), name=request.POST.get('username')).exists():
+                if ServayEntry.objects.filter(show_id=int(data), sessionId=request.COOKIES['csrftoken'], area_id=int(request.POST.get('area')), gender=request.POST.get('check'), name=request.POST.get('Fullname')).exists():
                     print("inside if")
                     pass
                 else:
                     print("inside else")
                     ServayEntry.objects.create(show_id=int(data), sessionId=request.COOKIES['csrftoken'], area_id=int(
-                        request.POST.get('area')), gender=request.POST.get('check'), name=request.POST.get('username'))
+                        request.POST.get('area')), gender=request.POST.get('check'), name=request.POST.get('Fullname'))
             return render(request, 'diwali_offer/thank-you.html')
 
     # shows = Shows.objects.all()

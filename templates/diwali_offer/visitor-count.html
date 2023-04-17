@@ -92,7 +92,7 @@
     <h1 style="margin: 5px;">Dashboard</h1>
     {% for d in cat %}
     <section>
-        <h2>{{d.cat_name}}</h2>
+        <!-- <h2>{{d.cat_name}}</h2> -->
         {% for ch in channel %}
         {% if ch.cat_id == d.id %}
         {% if 'none' in ch.channel_name %}

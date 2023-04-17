@@ -40,6 +40,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'survey_form',
     'rest_framework',
+    'import_export',    
+    'django_admin_lightweight_date_hierarchy',
 ]
 
 MIDDLEWARE = [

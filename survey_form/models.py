@@ -9,11 +9,13 @@ class Category(models.Model):
     def __str__(self):
         return self.cat_name # TODO
 
+
 class Area(models.Model):
     area_name = models.CharField(max_length=255)
 
     def __str__(self):
         return self.area_name # TODO
+
 
 class Channel(models.Model):
     cat = models.ForeignKey(Category, on_delete = models.CASCADE)
@@ -21,6 +23,7 @@ class Channel(models.Model):
 
     def __str__(self):
         return self.channel_name # TODO
+
 
 class Shows(models.Model):
     cat = models.ForeignKey(Category, on_delete = models.CASCADE)
@@ -31,6 +34,7 @@ class Shows(models.Model):
 
     def __str__(self):
         return self.show_name # TODO
+
 
 class ServayEntry(models.Model):
     GENDER_CHOICES = (
@@ -44,7 +48,6 @@ class ServayEntry(models.Model):
     gender = models.CharField(max_length=1, choices=GENDER_CHOICES)
     name = models.CharField(max_length=50,null=True,blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
-
 
 
     def __str__(self):
